@@ -1,0 +1,38 @@
+{%extends "index.html"%}
+{%block mycss%}
+<script>
+$(document).ready(function (){
+				$("#navli4").addClass("active")})
+</script>
+{%endblock%}
+{%block title%}wojiaohgl.com的TODO List{%endblock%}
+{%block content%}
+<div class="row"><br/></div><div class="row"><div class="col-lg-3">
+<ul class="nav nav-pills nav-stacked">
+<li id="listItemadd" role="presentation"><a>添加To-Do item</a></li>
+{%for post in toDoList%}
+<li id="listItem{{post.id}}" role="presentation"><a>{{post.title}}</a></li>
+{%endfor%}
+<!--		<span class="label label-info">{{post.timestamp|date}}</span>
+		<p><font size="5">{{post.body}}{{post.passStatus}}{{post.reward}}{{post.status}}</font></p> -->
+</ul>
+</div>
+<form>
+<div class="col-lg-9" id="addItem" style="display:;">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h2>输入标题：<input type='text'/> </h2>
+		</div>
+		<div class="panel-body">
+			<p>内容：<input type='text'></input></p>
+			<p>奖励：<input type='text'></input></p>
+			<p>审批通过：<input type='checkbox'></input></p>
+			<p>是否完成：<input type='checkbox'></input></p>
+		</div>
+	</div>
+</div>
+<form>
+</div>
+</div>
+{%endblock%}
+{%block visitNum%}{%endblock%}

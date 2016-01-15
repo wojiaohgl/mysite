@@ -1,0 +1,53 @@
+<script>
+function get_id(element){
+	var a="comment"+element.id;
+		if (document.getElementById(a).style.display=="none")
+			document.getElementById(a).style.display="";
+		else
+			document.getElementById(a).style.display="none";
+}
+</script>
+{%extends "index.html"%}
+{%block mycss%}
+<script>
+$(document).ready(function (){
+				$("#navli1").addClass("active")})
+</script>
+{%endblock%}
+{%block title%}wojiaohgl.com的小说连载{%endblock%}
+{%block content%}
+{% load pagination_tags %}
+{% autopaginate posts 10 %}
+      {%for post,comments in posts%}
+<div class="panel panel-default"> 
+	<div class = "panel-heading">
+		<h2>{{post.title}}</h2>
+	</div>
+	<div class ="panel-body">
+		<span class="label label-info">{{post.timestamp|date}}</span>
+		<div id="{{post.id}}" onclick=get_id(this)><p><font size="5">{{post.body}}</font></p></div>
+<div id="comment{{post.id}}" style="display:none;"> 
+	    	<form action="/blog/addComment" method="get">
+	<div class="input-group">
+		<input type="hidden" name="blogId" value="{{post.id}}">
+		<input type="text" class="form-control" name="q">
+		<input type="hidden" name="userName" value="{{user}}">
+		<span class="input-group-btn">
+		        <button class="btn btn-default" type="submit">添加评论！</button>
+	      	</span>
+	</div>
+		</form>
+			<h3>评论</h3>
+			{%if comments|length_is:"0"%}
+			<p>没有评论！</p>
+			{%endif%}
+			{%for comment in comments%}
+			<p>{{comment.user}}   {{comment.timestamp}}</p>
+			<p>{{comment.body}}</p>
+			{%endfor%}
+		</div>
+	</div>
+</div>
+	{%endfor%}
+	<center>{%paginate%}</center>
+{%endblock%}
